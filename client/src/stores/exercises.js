@@ -1,22 +1,8 @@
 import { observable, action, onBecomeObserved } from "mobx";
+import PropTypes from "prop-types";
 import api from "../utils/api";
 
-export class Exercise {
-  @observable name;
-  @observable description;
-  @observable level;
-  @observable type;
-  @observable muscleGroups;
-  @observable equipment;
-  @observable photoUrl;
-  @observable videoUrl;
-}
-
 export class Exercises {
-  static INSTANCE;
-  static getInstance = () =>
-    Exercises.INSTANCE || (Exercises.INSTANCE = new Exercises());
-
   constructor() {
     onBecomeObserved(this, "exercises", this.fetchExercises);
   }
@@ -33,3 +19,19 @@ export class Exercises {
     }
   };
 }
+
+export const exercisesPropType = PropTypes.shape({
+  exercises: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.number,
+      name: PropTypes.string,
+      description: PropTypes.string,
+      photoUrl: PropTypes.string,
+      videoUrl: PropTypes.string,
+      level: PropTypes.string,
+      type: PropTypes.string,
+      muscleGroups: [PropTypes.string],
+      equipment: [PropTypes.string],
+    })
+  ),
+});

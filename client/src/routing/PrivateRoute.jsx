@@ -1,31 +1,14 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
+import { isLogin } from "../utils/isAuth";
 
-export const PrivateRoute = ({
-  component: Component,
-  auth: { isAuthenticated, loading },
-  ...rest
-}) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      loading ? (
-        "bla"
-      ) : isAuthenticated ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/login" />
-      )
-    }
-  />
-);
-
-PrivateRoute.propTypes = {
-  auth: PropTypes.object.isRequired,
+export const PrivateRoute = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        isLogin() ? <Component {...props} /> : <Redirect to="/login" />
+      }
+    />
+  );
 };
-
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-

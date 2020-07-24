@@ -7,15 +7,9 @@ import { ExerciseCard } from "../components";
 @inject("exercises")
 @observer
 export class Exercises extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.exerciseList = this.props.exercises.Exercises.getInstance();
-  }
-
   @computed
   get listExercises() {
-    return this.exerciseList.exercises.map((exercise) => (
+    return this.props.exercises.exercises.map((exercise) => (
       <ExerciseCard key={exercise._id} {...exercise} />
     ));
   }
@@ -25,7 +19,7 @@ export class Exercises extends React.Component {
       <div>
         <Heading textAlign="center" mb="1rem">Exercises</Heading>
         <div>
-          {this.exerciseList.exercises.length ? (
+          {this.props.exercises.exercises.length ? (
             <Grid templateColumns="repeat(4, 1fr)" gap={6}>{this.listExercises}</Grid>
           ) : (
             <Spinner size="xl" />

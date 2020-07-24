@@ -2,7 +2,11 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Box, Flex, Link } from "@chakra-ui/core";
 import { FaDumbbell } from "react-icons/fa";
+import { inject, observer } from "mobx-react";
+import { logout, isLogin } from "../../utils/isAuth";
 
+@inject("user")
+@observer
 export class Header extends React.Component {
   get publicRoutes() {
     return (
@@ -38,7 +42,7 @@ export class Header extends React.Component {
         <Link ml="10px" as={RouterLink} to="/profile">
           My Profile
         </Link>
-        <Link ml="10px" as={RouterLink} to="/login">
+        <Link ml="10px" onClick={logout}>
           Log Out
         </Link>
       </Flex>
@@ -64,8 +68,6 @@ export class Header extends React.Component {
       pr: "3rem",
     };
 
-    const authenticated = false;
-
     return (
       <Box {...boxProps}>
         <Flex align="center" justify="space-between">
@@ -78,7 +80,7 @@ export class Header extends React.Component {
           >
             <FaDumbbell /> Workout Creator
           </Box>
-          <Box>{authenticated ? this.privateRoutes : this.publicRoutes}</Box>
+          <Box>{this.props.user.authenticated ? this.privateRoutes : this.publicRoutes}</Box>
         </Flex>
       </Box>
     );

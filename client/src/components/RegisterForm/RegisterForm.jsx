@@ -1,5 +1,6 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { inject } from "mobx-react";
 import {
   Input,
   InputGroup,
@@ -10,6 +11,7 @@ import {
   Link,
 } from "@chakra-ui/core";
 
+@inject("user")
 export class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
@@ -27,6 +29,7 @@ export class RegisterForm extends React.Component {
           pr="4.5rem"
           type={this.state.show ? "text" : "password"}
           placeholder="Enter password"
+          onChange={this.handlePasswordChange}
         />
         <InputRightElement width="4.5rem" size="sm">
           <Button h="1.75rem" size="sm" onClick={this.handleTogglePassword}>
@@ -37,13 +40,28 @@ export class RegisterForm extends React.Component {
     );
   }
 
+  handleEmailChange = e => {
+    this.props.user.setEmail(e.target.value);
+  };
+
+  handlePasswordChange = e => {
+    this.props.user.setPassword(e.target.value);
+  };
+
+  handleRegister = async () => {
+    await this.props.user.register();
+    if (this.props.user.authenticated) {
+      this.props.history.push("/");
+    }
+  };
+
   render() {
     return (
       <div>
-        <Input size="md" placeholder="Enter email" />
+        <Input size="md" placeholder="Enter email" onChange={this.handleEmailChange} />
         {this.passwordField}
         <Stack>
-          <Button>Sign Up</Button>
+          <Button onClick={this.handleRegister}>Sign Up</Button>
           <Text>
             Have an account already?{" "}
             <Link as={RouterLink} to="/login">
