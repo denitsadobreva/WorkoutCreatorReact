@@ -1,5 +1,17 @@
 import React from "react";
+import { Provider } from "mobx";
+import { Heading } from "@chakra-ui/core";
+import { inject } from "mobx-react";
 
-export const Exercises = () => {
-  return <div>Exercises Page</div>;
-};
+@inject("exercises")
+class Exercises extends React.Component {
+  render() {
+    return (
+      <Provider>
+        <Heading>Exercises</Heading>
+      </Provider>
+    );
+  }
+}
+
+export { Exercises };

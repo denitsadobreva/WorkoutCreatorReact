@@ -4,11 +4,12 @@ import { Route, BrowserRouter, Switch } from "react-router-dom";
 import { ThemeProvider, CSSReset, theme } from "@chakra-ui/core";
 import { Header, Footer } from "./components";
 import { Routes } from "./routing/Routes";
+import { exercisesStore } from './stores';
 import "./App.css";
 
 const App = () => {
   return (
-    <Provider>
+    <Provider exercises={exercisesStore}>
       <BrowserRouter>
         <Fragment>
           <ThemeProvider theme={theme}>
