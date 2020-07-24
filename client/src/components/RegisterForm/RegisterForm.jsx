@@ -10,7 +10,7 @@ import {
   Link,
 } from "@chakra-ui/core";
 
-export class LoginForm extends React.Component {
+export class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { show: false };
@@ -43,11 +43,11 @@ export class LoginForm extends React.Component {
         <Input size="md" placeholder="Enter email" />
         {this.passwordField}
         <Stack>
-          <Button>Log In</Button>
+          <Button>Sign Up</Button>
           <Text>
-            No profile yet?{" "}
-            <Link as={RouterLink} to="/register">
-              Sign up now.
+            Have an account already?{" "}
+            <Link as={RouterLink} to="/login">
+              Log in now.
             </Link>
           </Text>
         </Stack>

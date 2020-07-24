@@ -1,6 +1,6 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { Text, Box, Flex, Link } from "@chakra-ui/core";
+import { Box, Flex, Link } from "@chakra-ui/core";
 import { FaDumbbell } from "react-icons/fa";
 
 export class Header extends React.Component {
