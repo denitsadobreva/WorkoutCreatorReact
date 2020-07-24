@@ -9,7 +9,21 @@ const Exercise = require("../../models/Exercise");
 // @access  Public
 router.get("/", async (req, res) => {
   try {
-    const exercises = await Exercise.find();
+    const {
+      level = ".*",
+      type = ".*",
+      equipment = ".*",
+      muscleGroups = ".*",
+    } = req.query;
+
+    const exercises = await Exercise.find({
+      $and: [
+        { level: { $regex: level } },
+        { type: { $regex: type } },
+        { equipment: { $elemMatch: { $regex: equipment } } },
+        { muscleGroups: { $elemMatch: { $regex: muscleGroups } } },
+      ],
+    });
     res.json(exercises);
   } catch (err) {
     console.error(err.message);
@@ -32,60 +46,6 @@ router.get("/:id", async (req, res) => {
   } catch (err) {
     console.error(err.message);
 
-    res.status(500).send("Server Error");
-  }
-});
-
-// @route   GET api/level/:level
-// @desc    Get all exercises by exercise level
-// @access  Public
-router.get("/level/:level", async (req, res) => {
-  try {
-    const exercises = await Exercise.find({ level: req.params.level });
-    res.json(exercises);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
-// @route   GET api/type/:type
-// @desc    Get all exercises by exercise type
-// @access  Public
-router.get("/type/:type", async (req, res) => {
-  try {
-    const exercises = await Exercise.find({ type: req.params.type });
-    res.json(exercises);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
-// @route   GET api/muscleGroups/:muscleGroup
-// @desc    Get all exercises by muscle group
-// @access  Public
-router.get("/muscleGroups/:muscleGroup", async (req, res) => {
-  try {
-    const exercises = await Exercise.find({
-      muscleGroup: req.params.muscleGroup,
-    });
-    res.json(exercises);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
-// @route   GET api/equipment/:equipment
-// @desc    Get all exercises by equipment
-// @access  Public
-router.get("/equipment/:equipment", async (req, res) => {
-  try {
-    const exercises = await Exercise.find({ equipment: req.params.equipment });
-    res.json(exercises);
-  } catch (err) {
-    console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
