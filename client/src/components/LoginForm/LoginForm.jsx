@@ -30,6 +30,7 @@ export class LoginForm extends React.Component {
           type={this.state.show ? "text" : "password"}
           placeholder="Enter password"
           onChange={this.handlePasswordChange}
+          mb="0.5rem"
         />
         <InputRightElement width="4.5rem" size="sm">
           <Button h="1.75rem" size="sm" onClick={this.handleTogglePassword}>
@@ -59,6 +60,7 @@ export class LoginForm extends React.Component {
           size="md"
           placeholder="Enter email"
           onChange={this.handleEmailChange}
+          mb="0.5rem"
         />
         {this.passwordField}
         <Stack>

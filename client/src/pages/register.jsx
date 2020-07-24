@@ -5,7 +5,7 @@ import { RegisterForm } from "../components";
 export const Register = () => {
   return (
     <div>
-      <Heading>Registration</Heading>
+      <Heading textAlign="center" mb="1rem">Registration</Heading>
       <RegisterForm />
     </div>
   );

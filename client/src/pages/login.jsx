@@ -5,7 +5,7 @@ import { LoginForm } from '../components';
 export const Login = () => {
   return (
     <div>
-      <Heading>Log In</Heading>
+      <Heading textAlign="center" mb="1rem">Log In</Heading>
       <LoginForm />
     </div>
   );

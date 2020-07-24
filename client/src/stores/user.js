@@ -5,9 +5,10 @@ import { login, isLogin } from "../utils/isAuth";
 export class User {
   @observable email;
   @observable password;
+  @observable isAuthenticated;
 
   @computed get authenticated() {
-    return isLogin();
+    return this.isAuthenticated || isLogin();
   }
 
   @action
@@ -30,6 +31,7 @@ export class User {
 
       if (res.status === 200) {
         login(res.token);
+        this.isAuthenticated = isLogin();
       }
     } catch (err) {
       console.log(err.message);
@@ -46,6 +48,7 @@ export class User {
 
       if (res.status === 200) {
         login(res.token);
+        this.isAuthenticated = isLogin();
       }
     } catch (err) {
       console.log(err.message);

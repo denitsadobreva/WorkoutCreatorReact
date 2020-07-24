@@ -30,6 +30,7 @@ export class RegisterForm extends React.Component {
           type={this.state.show ? "text" : "password"}
           placeholder="Enter password"
           onChange={this.handlePasswordChange}
+          mb="0.5rem"
         />
         <InputRightElement width="4.5rem" size="sm">
           <Button h="1.75rem" size="sm" onClick={this.handleTogglePassword}>
@@ -40,11 +41,11 @@ export class RegisterForm extends React.Component {
     );
   }
 
-  handleEmailChange = e => {
+  handleEmailChange = (e) => {
     this.props.user.setEmail(e.target.value);
   };
 
-  handlePasswordChange = e => {
+  handlePasswordChange = (e) => {
     this.props.user.setPassword(e.target.value);
   };
 
@@ -58,7 +59,12 @@ export class RegisterForm extends React.Component {
   render() {
     return (
       <div>
-        <Input size="md" placeholder="Enter email" onChange={this.handleEmailChange} />
+        <Input
+          size="md"
+          placeholder="Enter email"
+          onChange={this.handleEmailChange}
+          mb="0.5rem"
+        />
         {this.passwordField}
         <Stack>
           <Button onClick={this.handleRegister}>Sign Up</Button>

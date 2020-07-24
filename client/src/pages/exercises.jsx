@@ -22,7 +22,7 @@ export class Exercises extends React.Component {
           {this.props.exercises.exercises.length ? (
             <Grid templateColumns="repeat(4, 1fr)" gap={6}>{this.listExercises}</Grid>
           ) : (
-            <Spinner size="xl" />
+            <Spinner size="xl" color="blue" thickness="4px" mr="auto" ml="auto" />
           )}
         </div>
       </div>

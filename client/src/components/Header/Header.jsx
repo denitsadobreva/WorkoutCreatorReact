@@ -3,7 +3,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { Box, Flex, Link } from "@chakra-ui/core";
 import { FaDumbbell } from "react-icons/fa";
 import { inject, observer } from "mobx-react";
-import { logout, isLogin } from "../../utils/isAuth";
+import { logout } from "../../utils/isAuth";
 
 @inject("user")
 @observer
