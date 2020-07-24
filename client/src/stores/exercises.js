@@ -13,6 +13,10 @@ export class Exercise {
 }
 
 export class Exercises {
+  static INSTANCE;
+  static getInstance = () =>
+    Exercises.INSTANCE || (Exercises.INSTANCE = new Exercises());
+
   constructor() {
     onBecomeObserved(this, "exercises", this.fetchExercises);
   }
@@ -21,7 +25,9 @@ export class Exercises {
 
   @action fetchExercises = async () => {
     try {
-      this.exercises = await api.get("/exercises");
+      this.exercises = await api.get("/exercises").then(function (response) {
+        return response.data;
+      });
     } catch (err) {
       console.error(err.message);
     }
