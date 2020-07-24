@@ -1,7 +1,24 @@
 import React from "react";
-import { Box, Image, Badge } from "@chakra-ui/core";
+import { Box, Image, Badge, Button } from "@chakra-ui/core";
+import { ExerciseDetails } from "../ExerciseDetails/ExerciseDetails";
 
 export class ExerciseCard extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isModalOpen: false,
+    };
+  }
+
+  handleOpenModal = () => {
+    this.setState({ isModalOpen: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ isModalOpen: false });
+  };
+
   render() {
     return (
       <Box maxW="sm" borderWidth="1px" rounded="lg" overflow="hidden">
@@ -44,6 +61,19 @@ export class ExerciseCard extends React.Component {
           >
             {this.props.name}
           </Box>
+
+          <Button
+            variantColor="blue"
+            variant="link"
+            onClick={this.handleOpenModal}
+          >
+            View Details
+          </Button>
+          <ExerciseDetails
+            {...this.props}
+            onClose={this.handleCloseModal}
+            isOpen={this.state.isModalOpen}
+          />
         </Box>
       </Box>
     );
