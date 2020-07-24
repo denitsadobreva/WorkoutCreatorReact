@@ -1,18 +1,22 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { Heading, Box, Flex, Link } from "@chakra-ui/core";
+import { Text, Box, Flex, Link } from "@chakra-ui/core";
+import { FaDumbbell } from "react-icons/fa";
 
 export class Header extends React.Component {
   get publicRoutes() {
     return (
       <Flex align="center" justify="space-around">
-        <Link as={RouterLink} to="/exercises">
+        <Link ml="10px" as={RouterLink} to="/">
+          Home
+        </Link>
+        <Link ml="10px" as={RouterLink} to="/exercises">
           Exercises
         </Link>
-        <Link as={RouterLink} to="/register">
+        <Link ml="10px" as={RouterLink} to="/register">
           Sign Up
         </Link>
-        <Link as={RouterLink} to="/login">
+        <Link ml="10px" as={RouterLink} to="/login">
           Log In
         </Link>
       </Flex>
@@ -22,16 +26,19 @@ export class Header extends React.Component {
   get privateRoutes() {
     return (
       <Flex align="center" justify="space-around">
-        <Link as={RouterLink} to="/exercises">
+        <Link ml="10px" as={RouterLink} to="/">
+          Home
+        </Link>
+        <Link ml="10px" as={RouterLink} to="/exercises">
           Exercises
         </Link>
-        <Link as={RouterLink} to="/create">
+        <Link ml="10px" as={RouterLink} to="/create">
           Create Workout
         </Link>
-        <Link as={RouterLink} to="/profile">
+        <Link ml="10px" as={RouterLink} to="/profile">
           My Profile
         </Link>
-        <Link as={RouterLink} to="/login">
+        <Link ml="10px" as={RouterLink} to="/login">
           Log Out
         </Link>
       </Flex>
@@ -52,14 +59,25 @@ export class Header extends React.Component {
       width: "100%",
       height: "4rem",
       bg: "white",
+      p: "1rem",
+      pl: "3rem",
+      pr: "3rem",
     };
 
-    const authenticated = true;
+    const authenticated = false;
 
     return (
       <Box {...boxProps}>
         <Flex align="center" justify="space-between">
-          <Heading>Workout Creator</Heading>
+          <Box
+            fontSize="24px"
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            w="208px"
+          >
+            <FaDumbbell /> Workout Creator
+          </Box>
           <Box>{authenticated ? this.privateRoutes : this.publicRoutes}</Box>
         </Flex>
       </Box>
