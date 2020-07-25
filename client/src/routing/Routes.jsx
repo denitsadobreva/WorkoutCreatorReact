@@ -36,13 +36,7 @@ export class Routes extends React.Component {
             )}
           </Route>
           <Route exact path="/exercises" component={Exercises} />
-          <PrivateRoute exact path="/create">
-            {this.props.workout.finished ? (
-              <Redirect to="/profile" />
-            ) : (
-              <CreateWorkout />
-            )}
-          </PrivateRoute>
+          <PrivateRoute exact path="/create" component={CreateWorkout} />
           <PrivateRoute exact path="/profile" component={Profile} />
           <PrivateRoute exact path="/workouts/:id" component={Workout} />
           <Route component={NotFound} />
