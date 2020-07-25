@@ -4,3 +4,4 @@ export * from "./RegisterForm/RegisterForm";
 export * from "./LoginForm/LoginForm";
 export * from "./ExerciseCard/ExerciseCard";
 export * from "./ExerciseDetails/ExerciseDetails";
+export * from "./WorkoutDay/WorkoutDay";

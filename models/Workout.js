@@ -14,20 +14,24 @@ const WorkoutSchema = new Schema({
     type: String,
     required: false,
   },
-  exercises: [
+  days: [
     {
-      exercise: {
-        type: Schema.Types.ObjectId,
-        ref: "exercise",
-      },
-      sets: {
-        type: Number,
-        required: true,
-      },
-      reps: {
-        type: Number,
-        required: true,
-      },
+      exercises: [
+        {
+          exercise: {
+            type: Schema.Types.ObjectId,
+            ref: "exercise",
+          },
+          sets: {
+            type: Number,
+            required: true,
+          },
+          reps: {
+            type: Number,
+            required: true,
+          },
+        },
+      ],
     },
   ],
   date: {
