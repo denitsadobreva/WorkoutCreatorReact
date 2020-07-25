@@ -45,7 +45,7 @@ router.post("/", auth, async (req, res) => {
       user: req.user.id,
       name: req.body.name,
       description: req.body.description,
-      days: req.body.days,
+      exercises: req.body.exercises,
     });
 
     const workout = newWorkout.save();
@@ -69,7 +69,7 @@ router.put("/:id", auth, async (req, res) => {
           user: req.user.id,
           name: req.body.name,
           description: req.body.description,
-          days: req.body.days,
+          exercises: req.body.exercises,
         },
       }
     );

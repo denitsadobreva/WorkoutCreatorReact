@@ -30,7 +30,7 @@ export class User {
       });
 
       if (res.status === 200) {
-        login(res.token);
+        login(res.data.token);
         this.isAuthenticated = isLogin();
       }
     } catch (err) {
@@ -47,7 +47,7 @@ export class User {
       });
 
       if (res.status === 200) {
-        login(res.token);
+        login(res.data.token);
         this.isAuthenticated = isLogin();
       }
     } catch (err) {

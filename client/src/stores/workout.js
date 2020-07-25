@@ -3,14 +3,12 @@ import api from "../utils/api";
 
 export class Exercise {
   @observable exercise;
-  @observable sets;
-  @observable reps;
+  @observable sets = 3;
+  @observable reps = 10;
 
-  constructor({ id, sets, reps }) {
-    this.exercise = id;
-    this.sets = sets;
-    this.reps = reps;
-  }
+  @action setExercise = (exercise) => {
+    this.exercise = exercise;
+  };
 
   @action setSets = (sets) => {
     this.setSets = sets;
@@ -21,21 +19,18 @@ export class Exercise {
   };
 }
 
-export class WorkoutDay {
-  @observable exercises;
-
-  @action addExercise = ({ id, sets, reps }) => {
-    this.exercises.push(new Exercise({ id, sets, reps }));
-  };
-}
-
 export class Workout {
   @observable name;
   @observable description;
-  @observable days = [];
+  @observable exercises = [];
+  currentUser = "";
+  @observable finished = false;
+  @observable workouts;
 
   constructor() {
-    this.days.push(new WorkoutDay());
+    for (var i = 0; i < 7; i++) {
+      this.exercises.push(new Exercise());
+    }
   }
 
   @action setName = (name) => {
@@ -46,27 +41,65 @@ export class Workout {
     this.description = description;
   };
 
-  @action addDay = () => {
-    this.days.push(new WorkoutDay());
+  fetchCurrentUser = async () => {
+    try {
+      const res = await api.get("/auth", {
+        headers: {
+          "x-auth-token": localStorage.getItem("jwt"),
+        },
+      });
+
+      this.currentUser = res.data._id;
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   @action createWorkout = async () => {
     try {
+      await this.fetchCurrentUser();
+
       const res = await api.post(
         "/workouts",
         {
           name: this.name,
           description: this.description,
-          days: this.days,
+          exercises: this.exercises,
         },
         {
           headers: {
             "x-auth-token": localStorage.getItem("jwt"),
           },
+          params: {
+            user: this.currentUser,
+          },
         }
       );
 
-      console.log(res);
+      if (res.status === 200) {
+        this.finished = true;
+      }
+    } catch (err) {
+      console.error(err.message);
+    } finally {
+      this.finished = false;
+    }
+  };
+
+  @action fetchWorkouts = async () => {
+    try {
+      const res = await api.get("/workouts", {
+        headers: {
+          "x-auth-token": localStorage.getItem("jwt"),
+        },
+        params: {
+          user: this.currentUser,
+        },
+      });
+
+      if (res.status === 200) {
+        this.workouts = res.data;
+      }
     } catch (err) {
       console.error(err.message);
     }
