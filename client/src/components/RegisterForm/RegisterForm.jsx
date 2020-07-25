@@ -51,9 +51,6 @@ export class RegisterForm extends React.Component {
 
   handleRegister = async () => {
     await this.props.user.register();
-    if (this.props.user.authenticated) {
-      this.props.history.push("/");
-    }
   };
 
   render() {

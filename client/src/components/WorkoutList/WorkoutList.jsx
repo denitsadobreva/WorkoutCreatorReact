@@ -5,9 +5,9 @@ import { WorkoutCard } from "../WorkoutCard/WorkoutCard";
 export class WorkoutList extends React.Component {
   render() {
     return (
-      <Stack>
+      <Stack spacing={6}>
         {this.props.workouts && this.props.workouts.map((workout) => {
-          return <WorkoutCard {...workout} />;
+          return <WorkoutCard key={workout._id} {...workout} />;
         })}
       </Stack>
     );

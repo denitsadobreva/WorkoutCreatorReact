@@ -52,6 +52,31 @@ export class ExerciseCard extends React.Component {
             ))}
           </Box>
 
+          {this.props.reps && (
+            <Box>
+              <Box
+                color="gray.500"
+                fontWeight="semibold"
+                letterSpacing="wide"
+                fontSize="xs"
+                textTransform="uppercase"
+                ml="2"
+              >
+                {this.props.reps} reps
+              </Box>
+              <Box
+                color="gray.500"
+                fontWeight="semibold"
+                letterSpacing="wide"
+                fontSize="xs"
+                textTransform="uppercase"
+                ml="2"
+              >
+                {this.props.sets} sets
+              </Box>
+            </Box>
+          )}
+
           <Box
             mt="1"
             fontWeight="semibold"
